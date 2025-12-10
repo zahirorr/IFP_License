@@ -18,7 +18,7 @@ export interface FitResult {
 
 export interface IsoCalculationResponse {
   nominal_size: number;
-  hole: ToleranceDetail;
+  hole?: ToleranceDetail | null;
   shaft?: ToleranceDetail | null;
   fit?: FitResult | null;
   recommendation: string;
@@ -30,3 +30,5 @@ export enum CalculationMode {
   SINGLE = 'SINGLE',
   FIT = 'FIT'
 }
+
+export type Language = 'en' | 'de' | 'ar';

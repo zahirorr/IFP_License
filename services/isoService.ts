@@ -1,4 +1,4 @@
-import { IsoCalculationResponse, CalculationMode, FitResult, ToleranceDetail } from '../types';
+import { IsoCalculationResponse, CalculationMode, FitResult, ToleranceDetail, Language } from '../types';
 
 // --- ISO 286 DATA TABLES (Subset for common engineering use) ---
 
@@ -52,13 +52,152 @@ export const SUPPORTED_IT_GRADES = ['5', '6', '7', '8', '9', '10', '11'];
 export const SUPPORTED_HOLE_LETTERS = ['H', 'F', 'G', 'N', 'P'];
 export const SUPPORTED_SHAFT_LETTERS = ['d', 'e', 'f', 'g', 'h', 'k', 'm', 'n', 'p', 'r', 's'];
 
+// --- TRANSLATION MAPS ---
+const TERMS = {
+  en: {
+    nominal: "Nominal Size",
+    hole: "Hole",
+    shaft: "Shaft",
+    upper: "Upper dev",
+    lower: "Lower dev",
+    limits: "Limits",
+    fit_result: "Fit Result",
+    rec: "Recommendation",
+    clearance: "Clearance",
+    interference: "Interference",
+    transition: "Transition",
+    gap: "Always a gap",
+    tight: "Always tight",
+    mixed: "Can be loose or tight",
+    max_gap: "Max gap",
+    min_gap: "Min gap",
+    max_int: "Max interference",
+    min_int: "Min interference",
+    max_clearance: "Max clearance",
+    default_rec: "Standard ISO 286 tolerance zone."
+  },
+  de: {
+    nominal: "Nennmaß",
+    hole: "Bohrung",
+    shaft: "Welle",
+    upper: "Oberes Abmaß",
+    lower: "Unteres Abmaß",
+    limits: "Grenzmaße",
+    fit_result: "Passungsergebnis",
+    rec: "Empfehlung",
+    clearance: "Spiel",
+    interference: "Übermaß",
+    transition: "Übergang",
+    gap: "Immer Spiel",
+    tight: "Immer Übermaß",
+    mixed: "Spiel oder Übermaß möglich",
+    max_gap: "Max Spiel",
+    min_gap: "Min Spiel",
+    max_int: "Max Übermaß",
+    min_int: "Min Übermaß",
+    max_clearance: "Max Spiel",
+    default_rec: "Standard ISO 286 Toleranzfeld."
+  },
+  ar: {
+    nominal: "المقاس الاسمي",
+    hole: "الثقب",
+    shaft: "العمود",
+    upper: "الانحراف العلوي",
+    lower: "الانحراف السفلي",
+    limits: "الحدود",
+    fit_result: "نتيجة الازدواج",
+    rec: "التوصية",
+    clearance: "خلوص",
+    interference: "تداخل",
+    transition: "انتقالي",
+    gap: "فجوة دائماً",
+    tight: "تداخل دائماً",
+    mixed: "يمكن أن يكون خلوصاً أو تداخلاً",
+    max_gap: "أقصى خلوص",
+    min_gap: "أقل خلوص",
+    max_int: "أقصى تداخل",
+    min_int: "أقل تداخل",
+    max_clearance: "أقصى خلوص",
+    default_rec: "منطقة تفاوت ISO 286 قياسية."
+  }
+};
+
+const REC_TEMPLATES: Record<string, Record<Language, string>> = {
+    h_h: {
+        en: "Locational Clearance Fit - Parts assemble freely.",
+        de: "Spielpassung - Teile lassen sich frei montieren.",
+        ar: "ازدواج خلوصي موضعي - تجميع الأجزاء بحرية."
+    },
+    h_g: {
+        en: "Precision Sliding Fit - Parts move/slide accurately.",
+        de: "Präzisions-Gleitpassung - Teile bewegen/gleiten genau.",
+        ar: "ازدواج انزلاقي دقيق - الأجزاء تتحرك/تنزلق بدقة."
+    },
+    h_f: {
+        en: "Running Fit - Good for lubrication.",
+        de: "Laufpassung - Gut für Schmierung.",
+        ar: "ازدواج تشغيلي - جيد للتزييت."
+    },
+    h_e: {
+        en: "Loose Running Fit - Noticeable clearance.",
+        de: "Lockere Laufpassung - Merkliches Spiel.",
+        ar: "ازدواج تشغيلي واسع - خلوص ملحوظ."
+    },
+    h_k: {
+        en: "Locational Transition Fit - Accurate location.",
+        de: "Übergangspassung - Genaue Positionierung.",
+        ar: "ازدواج انتقالي موضعي - تحديد موقع دقيق."
+    },
+    h_m: {
+        en: "Transition Fit - Tight, possible slight interference.",
+        de: "Übergangspassung - Fest, mögliches leichtes Übermaß.",
+        ar: "ازدواج انتقالي - محكم، احتمال تداخل طفيف."
+    },
+    h_n: {
+        en: "Transition/Interference - Fixed location.",
+        de: "Übergang/Übermaß - Feste Positionierung.",
+        ar: "ازدواج انتقالي/تداخلي - موقع ثابت."
+    },
+    h_p: {
+        en: "Locational Interference Fit - Press fit.",
+        de: "Presspassung - Feste Positionierung.",
+        ar: "ازدواج تداخلي موضعي - تثبيت بالضغط."
+    },
+    h_s: {
+        en: "Medium Drive Fit - Permanent assembly.",
+        de: "Mittelstarke Treibpassung - Dauerhafte Montage.",
+        ar: "ازدواج دفع متوسط - تجميع دائم."
+    }
+};
+
+const GENERIC_REC = {
+    Clearance: {
+        en: "Parts will slide or run freely.",
+        de: "Teile gleiten oder laufen frei.",
+        ar: "الأجزاء ستنزلق أو تتحرك بحرية."
+    },
+    Interference: {
+        en: "Parts require force or thermal expansion to assemble.",
+        de: "Montage erfordert Kraft oder Wärmeausdehnung.",
+        ar: "تتطلب الأجزاء قوة أو تمدداً حرارياً للتجميع."
+    },
+    Transition: {
+        en: "Parts may slide or stick; requires careful assembly.",
+        de: "Teile können gleiten oder klemmen; erfordert sorgfältige Montage.",
+        ar: "قد تنزلق الأجزاء أو تلتصق؛ يتطلب تجميعاً دقيقاً."
+    },
+    Unknown: {
+        en: "Standard ISO 286 tolerance zone.",
+        de: "Standard ISO 286 Toleranzfeld.",
+        ar: "منطقة تفاوت ISO 286 قياسية."
+    }
+};
+
 
 // --- HELPER FUNCTIONS ---
 
 function getRangeIndex(nominal: number): number {
   if (nominal <= 0 || nominal > 500) return -1;
-  // Ranges are (min, max]
-  // 0-3, 3-6, etc.
   if (nominal <= 3) return 0;
   for (let i = 1; i < RANGES.length; i++) {
     if (nominal <= RANGES[i] && nominal > RANGES[i-1]) return i;
@@ -87,7 +226,6 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
   }
   const { letter, gradeNum } = parsed;
 
-  // Get IT Value
   const itValues = IT_TABLE[gradeNum];
   if (!itValues) {
     throw new Error(`Unsupported IT Grade: ${gradeNum}. Supported: 5, 6, 7, 8, 9, 10, 11`);
@@ -101,10 +239,6 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
     const devTable = SHAFT_DEVIATIONS[letter.toLowerCase()];
     if (!devTable) throw new Error(`Unsupported Shaft Deviation: ${letter}`);
     
-    // Logic for Shafts
-    // a-h: Fundamental Deviation is 'es'. ei = es - IT.
-    // j-zc: Fundamental Deviation is 'ei'. es = ei + IT.
-    
     const fundDev = devTable[rangeIdx];
     const letterCode = letter.toLowerCase();
     
@@ -116,11 +250,8 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
       es = ei + it;
     }
   } else {
-    // Hole Logic
     const devTable = HOLE_DEVIATIONS[letter.toUpperCase()];
-    // Fallback for standard Hole H if not found, but we enforce lookup
     if (!devTable) {
-        // Simple fallback for testing if user enters 'J' or something not in my small table
         if (letter.toUpperCase() === 'H') {
              ei = 0;
              es = it;
@@ -131,8 +262,6 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
         const fundDev = devTable[rangeIdx];
         const letterCode = letter.toUpperCase();
 
-        // A-H: Fundamental is EI. ES = EI + IT.
-        // J-ZC: Fundamental is ES. EI = ES - IT.
         if (['F', 'G', 'H'].includes(letterCode)) {
             ei = fundDev;
             es = ei + it;
@@ -143,7 +272,6 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
     }
   }
 
-  // Force strict ISO casing for display (Upper for Hole, Lower for Shaft)
   const displayGrade = isShaft 
     ? `${letter.toLowerCase()}${gradeNum}` 
     : `${letter.toUpperCase()}${gradeNum}`;
@@ -158,66 +286,74 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
   };
 }
 
-function getFitRecommendation(hole: string, shaft: string, type: string): string {
+function getFitRecommendation(hole: string, shaft: string, type: string, lang: Language): string {
     const h = hole.toUpperCase();
     const s = shaft.toLowerCase();
     
     if (h.startsWith('H')) {
-        if (s.startsWith('h')) return "Locational Clearance Fit - Parts assemble freely.";
-        if (s.startsWith('g')) return "Precision Sliding Fit - Parts move/slide accurately.";
-        if (s.startsWith('f')) return "Running Fit - Good for lubrication.";
-        if (s.startsWith('e')) return "Loose Running Fit - Noticeable clearance.";
-        if (s.startsWith('k')) return "Locational Transition Fit - Accurate location, compromise between clearance and interference.";
-        if (s.startsWith('m')) return "Transition Fit - Tight, possible slight interference. Assemble with mallet.";
-        if (s.startsWith('n')) return "Transition/Interference - Fixed location.";
-        if (s.startsWith('p')) return "Locational Interference Fit - Press fit for rigid location.";
-        if (s.startsWith('s')) return "Medium Drive Fit - Permanent assembly.";
+        const key = `h_${s.charAt(0)}`;
+        if (REC_TEMPLATES[key]) {
+            return REC_TEMPLATES[key][lang];
+        }
     }
     
-    if (type === 'Clearance') return "Parts will slide or run freely.";
-    if (type === 'Interference') return "Parts require force or thermal expansion to assemble.";
-    return "Parts may slide or stick; requires careful assembly.";
+    const safeType = (type === 'Clearance' || type === 'Interference' || type === 'Transition') ? type : 'Unknown';
+    return GENERIC_REC[safeType][lang];
 }
 
 export const calculateTolerance = async (
   nominal: number,
   mode: CalculationMode,
-  holeGrade: string,
-  shaftGrade?: string
+  grade1: string,
+  grade2: string | undefined,
+  language: Language = 'en'
 ): Promise<IsoCalculationResponse> => {
   
-  // Artificial small delay to simulate calculation/process feel
+  // Artificial small delay
   await new Promise(resolve => setTimeout(resolve, 300));
 
-  const holeTol = calculateComponentTolerance(nominal, holeGrade, false);
-  let shaftTol: ToleranceDetail | null = null;
+  const t = TERMS[language];
+  
+  let holeTol: ToleranceDetail | undefined | null = null;
+  let shaftTol: ToleranceDetail | undefined | null = null;
   let fitResult: FitResult | null = null;
 
-  if (mode === CalculationMode.FIT && shaftGrade) {
-    shaftTol = calculateComponentTolerance(nominal, shaftGrade, true);
+  if (mode === CalculationMode.FIT && grade2) {
+    // In FIT mode, we assume grade1 is Hole, grade2 is Shaft
+    holeTol = calculateComponentTolerance(nominal, grade1, false);
+    shaftTol = calculateComponentTolerance(nominal, grade2, true);
+  } else {
+    // SINGLE Mode
+    // Check if grade1 is shaft (lowercase)
+    const firstChar = grade1.charAt(0);
+    const isShaft = firstChar === firstChar.toLowerCase() && firstChar !== firstChar.toUpperCase();
+    
+    if (isShaft) {
+        shaftTol = calculateComponentTolerance(nominal, grade1, true);
+        holeTol = null;
+    } else {
+        holeTol = calculateComponentTolerance(nominal, grade1, false);
+        shaftTol = null;
+    }
+  }
 
+  if (mode === CalculationMode.FIT && holeTol && shaftTol) {
     const maxClearance = holeTol.es - shaftTol.ei;
     const minClearance = holeTol.ei - shaftTol.es;
     
-    // Interpretation:
-    // If minClearance >= 0 -> Clearance Fit
-    // If maxClearance <= 0 -> Interference Fit (values will be negative)
-    // If crosses zero -> Transition
-
     let type: FitResult['type'] = 'Transition';
     let description = "";
 
+    // Fit Logic
     if (minClearance >= 0) {
         type = 'Clearance';
-        description = `Always a gap. Max gap: ${maxClearance}µm, Min gap: ${minClearance}µm.`;
+        description = `${t.gap}. ${t.max_gap}: ${maxClearance}µm, ${t.min_gap}: ${minClearance}µm.`;
     } else if (maxClearance <= 0) {
         type = 'Interference';
-        // Convert to positive interference values for display usually, 
-        // but math-wise max interference corresponds to min algebraic clearance
-        description = `Always tight. Max interference: ${Math.abs(minClearance)}µm, Min interference: ${Math.abs(maxClearance)}µm.`;
+        description = `${t.tight}. ${t.max_int}: ${Math.abs(minClearance)}µm, ${t.min_int}: ${Math.abs(maxClearance)}µm.`;
     } else {
         type = 'Transition';
-        description = `Can be loose or tight. Max clearance: ${maxClearance}µm, Max interference: ${Math.abs(minClearance)}µm.`;
+        description = `${t.mixed}. ${t.max_clearance}: ${maxClearance}µm, ${t.max_int}: ${Math.abs(minClearance)}µm.`;
     }
 
     fitResult = {
@@ -232,25 +368,32 @@ export const calculateTolerance = async (
 
   const fitType = fitResult ? fitResult.type : 'Unknown';
   const recommendation = fitResult 
-    ? getFitRecommendation(holeGrade, shaftGrade || '', fitType) 
-    : "Standard ISO 286 tolerance zone.";
+    ? getFitRecommendation(grade1, grade2 || '', fitType, language) 
+    : t.default_rec;
 
-  // Generate text summary
-  let summary = `Nominal Size: ${nominal} mm\n\n`;
-  summary += `Hole [${holeTol.grade}]:\n`;
-  summary += `- Upper dev (ES): ${holeTol.es > 0 ? '+' : ''}${holeTol.es} µm\n`;
-  summary += `- Lower dev (EI): ${holeTol.ei > 0 ? '+' : ''}${holeTol.ei} µm\n`;
-  summary += `- Limits: ${holeTol.min_size.toFixed(3)} - ${holeTol.max_size.toFixed(3)} mm\n\n`;
+  // Generate text summary in requested language
+  let summary = `${t.nominal}: ${nominal} mm\n\n`;
+  
+  if (holeTol) {
+      summary += `${t.hole} [${holeTol.grade}]:\n`;
+      summary += `- ${t.upper} (ES): ${holeTol.es > 0 ? '+' : ''}${holeTol.es} µm\n`;
+      summary += `- ${t.lower} (EI): ${holeTol.ei > 0 ? '+' : ''}${holeTol.ei} µm\n`;
+      summary += `- ${t.limits}: ${holeTol.min_size.toFixed(3)} - ${holeTol.max_size.toFixed(3)} mm\n\n`;
+  }
+  
+  if (shaftTol) {
+      summary += `${t.shaft} [${shaftTol.grade}]:\n`;
+      summary += `- ${t.upper} (es): ${shaftTol.es > 0 ? '+' : ''}${shaftTol.es} µm\n`;
+      summary += `- ${t.lower} (ei): ${shaftTol.ei > 0 ? '+' : ''}${shaftTol.ei} µm\n`;
+      summary += `- ${t.limits}: ${shaftTol.min_size.toFixed(3)} - ${shaftTol.max_size.toFixed(3)} mm\n\n`;
+  }
 
-  if (shaftTol && fitResult) {
-      summary += `Shaft [${shaftTol.grade}]:\n`;
-      summary += `- Upper dev (es): ${shaftTol.es > 0 ? '+' : ''}${shaftTol.es} µm\n`;
-      summary += `- Lower dev (ei): ${shaftTol.ei > 0 ? '+' : ''}${shaftTol.ei} µm\n`;
-      summary += `- Limits: ${shaftTol.min_size.toFixed(3)} - ${shaftTol.max_size.toFixed(3)} mm\n\n`;
-      
-      summary += `Fit Result: ${fitResult.type}\n`;
+  if (fitResult) {
+      const translatedFitType = fitResult.type === 'Clearance' ? t.clearance : fitResult.type === 'Interference' ? t.interference : t.transition;
+
+      summary += `${t.fit_result}: ${translatedFitType}\n`;
       summary += `${fitResult.description}\n`;
-      summary += `Recommendation: ${recommendation}`;
+      summary += `${t.rec}: ${recommendation}`;
   }
 
   return {
