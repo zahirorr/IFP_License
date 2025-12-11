@@ -27,6 +27,8 @@ async function loadLicensesFromGitHub() {
   if (!GITHUB_TOKEN) return { data: [], sha: null };
 
   const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
+  console.log(`Debug: Attempting to fetch licenses from ${url}`); // Log URL
+
   try {
     const response = await axios.get(url, {
       headers: {
@@ -37,13 +39,15 @@ async function loadLicensesFromGitHub() {
 
     const fileContent = Buffer.from(response.data.content, "base64").toString("utf-8");
     const json = JSON.parse(fileContent);
+    console.log(`Debug: Successfully loaded ${Array.isArray(json) ? json.length : 0} licenses.`);
     return { data: Array.isArray(json) ? json : [], sha: response.data.sha };
   } catch (error) {
     if (error.response && error.response.status === 404) {
-      console.log("ℹ️ licenses.json not found on GitHub. Starting with empty list.");
-      return { data: [], sha: null }; // File doesn't exist yet
+      console.error("Debug: GitHub returned 404. Either file is missing OR Token has no access to private repo.");
+      console.error(`Debug: URL tried: ${url}`);
+      return { data: [], sha: null };
     }
-    console.error("Error loading from GitHub:", error.message);
+    console.error("Debug: Error loading from GitHub:", error.message, error.response?.data);
     throw error;
   }
 }
