@@ -102,7 +102,7 @@ export const calculateTolerance = async (
 
     const text = response.text;
     if (!text) throw new Error("No response from Gemini");
-
+    
     return JSON.parse(text) as IsoCalculationResponse;
   } catch (error) {
     console.error("Gemini Calculation Error:", error);

@@ -1,23 +1,61 @@
 {
   "name": "iso-fit-pro",
+  "main": "dist-electron/main.js",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "description": "ISO Fit Pro Application",
+  "author": "Zaher",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build && electron-builder",
     "preview": "vite preview"
   },
   "dependencies": {
     "lucide-react": "^0.557.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "@google/genai": "^1.32.0"
+    "@google/genai": "^1.32.0",
+    "jspdf": "2.5.1",
+    "html2canvas": "1.4.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "electron": "^34.2.0",
+    "electron-builder": "^26.0.12",
+    "vite-plugin-electron": "^0.29.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
+  },
+  "build": {
+    "appId": "com.zaher.isofitpro",
+    "productName": "ISO Fit Pro",
+    "copyright": "Copyright © 2025 Zaher",
+    "directories": {
+      "output": "release/${version}"
+    },
+    "files": [
+      "dist",
+      "dist-electron",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false
+    }
   }
 }

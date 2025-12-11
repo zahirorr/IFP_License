@@ -48,7 +48,7 @@ const HOLE_DEVIATIONS: Record<string, number[]> = {
   'G': [2, 4, 5, 6, 9, 9, 10, 12, 14, 15, 17, 18, 20], // EI
   'N': [-4, -8, -10, -12, -15, -17, -20, -23, -27, -31, -34, -37, -40], // ES
   'P': [-6, -12, -15, -18, -22, -26, -32, -37, -43, -50, -56, -62, -68], // ES
-
+  
   // Expanded for Shaft Basis Support (derived from symmetry)
   'D': invert(SHAFT_DEVIATIONS['d']), // EI
   'E': invert(SHAFT_DEVIATIONS['e']), // EI
@@ -155,131 +155,131 @@ const TERMS = {
 };
 
 const REC_TEMPLATES: Record<string, Record<Language, string>> = {
-  // Hole Basis (Hole H)
-  h_h: {
-    en: "Locational Clearance Fit - Parts assemble freely.",
-    de: "Spielpassung - Teile lassen sich frei montieren.",
-    fr: "Ajustement avec jeu - Assemblage libre des pièces.",
-    ar: "توافق خلوصي موضعي - تجميع الأجزاء بحرية."
-  },
-  h_g: {
-    en: "Precision Sliding Fit - Parts move/slide accurately.",
-    de: "Präzisions-Gleitpassung - Teile bewegen/gleiten genau.",
-    fr: "Ajustement glissant de précision - Les pièces glissent avec précision.",
-    ar: "توافق انزلاقي دقيق - الأجزاء تتحرك وتنزلق بدقة."
-  },
-  h_f: {
-    en: "Running Fit - Good for lubrication.",
-    de: "Laufpassung - Gut für Schmierung.",
-    fr: "Ajustement tournant - Bon pour la lubrification.",
-    ar: "توافق تشغيلي (دوار) - جيد للتزييت."
-  },
-  h_e: {
-    en: "Loose Running Fit - Noticeable clearance.",
-    de: "Lockere Laufpassung - Merkliches Spiel.",
-    fr: "Ajustement libre - Jeu notable.",
-    ar: "توافق تشغيلي واسع - خلوص ملحوظ."
-  },
-  h_d: {
-    en: "Loose Running Fit - Large clearance.",
-    de: "Lockere Laufpassung - Großes Spiel.",
-    fr: "Ajustement très libre - Jeu important.",
-    ar: "توافق تشغيلي واسع - خلوص كبير."
-  },
-  h_k: {
-    en: "Locational Transition Fit - Accurate location.",
-    de: "Übergangspassung - Genaue Positionierung.",
-    fr: "Ajustement incertain de positionnement - Localisation précise.",
-    ar: "توافق انتقالي موضعي - تحديد موقع دقيق."
-  },
-  h_m: {
-    en: "Transition Fit - Tight, possible slight interference.",
-    de: "Übergangspassung - Fest, mögliches leichtes Übermaß.",
-    fr: "Ajustement incertain - Serré, léger serrage possible.",
-    ar: "توافق انتقالي - محكم، احتمال تداخل طفيف."
-  },
-  h_n: {
-    en: "Transition/Interference - Fixed location.",
-    de: "Übergang/Übermaß - Feste Positionierung.",
-    fr: "Ajustement incertain/serré - Positionnement fixe.",
-    ar: "توافق انتقالي/تداخلي - موقع ثابت."
-  },
-  h_p: {
-    en: "Locational Interference Fit - Press fit.",
-    de: "Presspassung - Feste Positionierung.",
-    fr: "Ajustement serré de positionnement - Assemblage à la presse.",
-    ar: "توافق تداخلي موضعي - تثبيت بالضغط."
-  },
-  h_s: {
-    en: "Medium Drive Fit - Permanent assembly.",
-    de: "Mittelstarke Treibpassung - Dauerhafte Montage.",
-    fr: "Ajustement serré fort - Assemblage permanent.",
-    ar: "توافق دفع متوسط - تجميع دائم."
-  },
-  // Shaft Basis (Shaft h) - Mapping roughly to similar descriptions
-  g_h: {
-    en: "Precision Sliding Fit (Shaft Basis).",
-    de: "Präzisions-Gleitpassung (Einheitswelle).",
-    fr: "Ajustement glissant (Système Arbre).",
-    ar: "توافق انزلاقي دقيق (نظام أساس العمود)."
-  },
-  f_h: {
-    en: "Running Fit (Shaft Basis).",
-    de: "Laufpassung (Einheitswelle).",
-    fr: "Ajustement tournant (Système Arbre).",
-    ar: "توافق تشغيلي (نظام أساس العمود)."
-  },
-  k_h: {
-    en: "Locational Transition Fit (Shaft Basis).",
-    de: "Übergangspassung (Einheitswelle).",
-    fr: "Ajustement incertain (Système Arbre).",
-    ar: "توافق انتقالي (نظام أساس العمود)."
-  },
-  n_h: {
-    en: "Transition Fit (Shaft Basis).",
-    de: "Übergangspassung (Einheitswelle).",
-    fr: "Ajustement incertain (Système Arbre).",
-    ar: "توافق انتقالي (نظام أساس العمود)."
-  },
-  p_h: {
-    en: "Press Fit (Shaft Basis).",
-    de: "Presspassung (Einheitswelle).",
-    fr: "Ajustement serré (Système Arbre).",
-    ar: "تثبيت بالضغط (نظام أساس العمود)."
-  },
-  s_h: {
-    en: "Drive Fit (Shaft Basis).",
-    de: "Treibpassung (Einheitswelle).",
-    fr: "Ajustement serré fort (Système Arbre).",
-    ar: "تثبيت بالدفع (نظام أساس العمود)."
-  }
+    // Hole Basis (Hole H)
+    h_h: {
+        en: "Locational Clearance Fit - Parts assemble freely.",
+        de: "Spielpassung - Teile lassen sich frei montieren.",
+        fr: "Ajustement avec jeu - Assemblage libre des pièces.",
+        ar: "توافق خلوصي موضعي - تجميع الأجزاء بحرية."
+    },
+    h_g: {
+        en: "Precision Sliding Fit - Parts move/slide accurately.",
+        de: "Präzisions-Gleitpassung - Teile bewegen/gleiten genau.",
+        fr: "Ajustement glissant de précision - Les pièces glissent avec précision.",
+        ar: "توافق انزلاقي دقيق - الأجزاء تتحرك وتنزلق بدقة."
+    },
+    h_f: {
+        en: "Running Fit - Good for lubrication.",
+        de: "Laufpassung - Gut für Schmierung.",
+        fr: "Ajustement tournant - Bon pour la lubrification.",
+        ar: "توافق تشغيلي (دوار) - جيد للتزييت."
+    },
+    h_e: {
+        en: "Loose Running Fit - Noticeable clearance.",
+        de: "Lockere Laufpassung - Merkliches Spiel.",
+        fr: "Ajustement libre - Jeu notable.",
+        ar: "توافق تشغيلي واسع - خلوص ملحوظ."
+    },
+    h_d: {
+        en: "Loose Running Fit - Large clearance.",
+        de: "Lockere Laufpassung - Großes Spiel.",
+        fr: "Ajustement très libre - Jeu important.",
+        ar: "توافق تشغيلي واسع - خلوص كبير."
+    },
+    h_k: {
+        en: "Locational Transition Fit - Accurate location.",
+        de: "Übergangspassung - Genaue Positionierung.",
+        fr: "Ajustement incertain de positionnement - Localisation précise.",
+        ar: "توافق انتقالي موضعي - تحديد موقع دقيق."
+    },
+    h_m: {
+        en: "Transition Fit - Tight, possible slight interference.",
+        de: "Übergangspassung - Fest, mögliches leichtes Übermaß.",
+        fr: "Ajustement incertain - Serré, léger serrage possible.",
+        ar: "توافق انتقالي - محكم، احتمال تداخل طفيف."
+    },
+    h_n: {
+        en: "Transition/Interference - Fixed location.",
+        de: "Übergang/Übermaß - Feste Positionierung.",
+        fr: "Ajustement incertain/serré - Positionnement fixe.",
+        ar: "توافق انتقالي/تداخلي - موقع ثابت."
+    },
+    h_p: {
+        en: "Locational Interference Fit - Press fit.",
+        de: "Presspassung - Feste Positionierung.",
+        fr: "Ajustement serré de positionnement - Assemblage à la presse.",
+        ar: "توافق تداخلي موضعي - تثبيت بالضغط."
+    },
+    h_s: {
+        en: "Medium Drive Fit - Permanent assembly.",
+        de: "Mittelstarke Treibpassung - Dauerhafte Montage.",
+        fr: "Ajustement serré fort - Assemblage permanent.",
+        ar: "توافق دفع متوسط - تجميع دائم."
+    },
+    // Shaft Basis (Shaft h) - Mapping roughly to similar descriptions
+    g_h: {
+        en: "Precision Sliding Fit (Shaft Basis).",
+        de: "Präzisions-Gleitpassung (Einheitswelle).",
+        fr: "Ajustement glissant (Système Arbre).",
+        ar: "توافق انزلاقي دقيق (نظام أساس العمود)."
+    },
+    f_h: {
+        en: "Running Fit (Shaft Basis).",
+        de: "Laufpassung (Einheitswelle).",
+        fr: "Ajustement tournant (Système Arbre).",
+        ar: "توافق تشغيلي (نظام أساس العمود)."
+    },
+    k_h: {
+        en: "Locational Transition Fit (Shaft Basis).",
+        de: "Übergangspassung (Einheitswelle).",
+        fr: "Ajustement incertain (Système Arbre).",
+        ar: "توافق انتقالي (نظام أساس العمود)."
+    },
+    n_h: {
+        en: "Transition Fit (Shaft Basis).",
+        de: "Übergangspassung (Einheitswelle).",
+        fr: "Ajustement incertain (Système Arbre).",
+        ar: "توافق انتقالي (نظام أساس العمود)."
+    },
+    p_h: {
+        en: "Press Fit (Shaft Basis).",
+        de: "Presspassung (Einheitswelle).",
+        fr: "Ajustement serré (Système Arbre).",
+        ar: "تثبيت بالضغط (نظام أساس العمود)."
+    },
+    s_h: {
+        en: "Drive Fit (Shaft Basis).",
+        de: "Treibpassung (Einheitswelle).",
+        fr: "Ajustement serré fort (Système Arbre).",
+        ar: "تثبيت بالدفع (نظام أساس العمود)."
+    }
 };
 
 const GENERIC_REC = {
-  Clearance: {
-    en: "Parts will slide or run freely.",
-    de: "Teile gleiten oder laufen frei.",
-    fr: "Les pièces glissent ou tournent librement.",
-    ar: "الأجزاء ستنزلق أو تتحرك بحرية."
-  },
-  Interference: {
-    en: "Parts require force or thermal expansion to assemble.",
-    de: "Montage erfordert Kraft oder Wärmeausdehnung.",
-    fr: "Assemblage par force ou expansion thermique requis.",
-    ar: "تتطلب الأجزاء قوة أو تمدداً حرارياً للتجميع."
-  },
-  Transition: {
-    en: "Parts may slide or stick; requires careful assembly.",
-    de: "Teile können gleiten oder klemmen; erfordert sorgfältige Montage.",
-    fr: "Les pièces peuvent glisser ou serrer; assemblage précautionneux requis.",
-    ar: "قد تنزلق الأجزاء أو تلتصق؛ يتطلب تجميعاً دقيقاً."
-  },
-  Unknown: {
-    en: "Standard ISO 286 tolerance zone.",
-    de: "Standard ISO 286 Toleranzfeld.",
-    fr: "Zone de tolérance ISO 286 standard.",
-    ar: "منطقة تفاوت ISO 286 قياسية."
-  }
+    Clearance: {
+        en: "Parts will slide or run freely.",
+        de: "Teile gleiten oder laufen frei.",
+        fr: "Les pièces glissent ou tournent librement.",
+        ar: "الأجزاء ستنزلق أو تتحرك بحرية."
+    },
+    Interference: {
+        en: "Parts require force or thermal expansion to assemble.",
+        de: "Montage erfordert Kraft oder Wärmeausdehnung.",
+        fr: "Assemblage par force ou expansion thermique requis.",
+        ar: "تتطلب الأجزاء قوة أو تمدداً حرارياً للتجميع."
+    },
+    Transition: {
+        en: "Parts may slide or stick; requires careful assembly.",
+        de: "Teile können gleiten oder klemmen; erfordert sorgfältige Montage.",
+        fr: "Les pièces peuvent glisser ou serrer; assemblage précautionneux requis.",
+        ar: "قد تنزلق الأجزاء أو تلتصق؛ يتطلب تجميعاً دقيقاً."
+    },
+    Unknown: {
+        en: "Standard ISO 286 tolerance zone.",
+        de: "Standard ISO 286 Toleranzfeld.",
+        fr: "Zone de tolérance ISO 286 standard.",
+        ar: "منطقة تفاوت ISO 286 قياسية."
+    }
 };
 
 
@@ -289,7 +289,7 @@ function getRangeIndex(nominal: number): number {
   if (nominal <= 0 || nominal > 500) return -1;
   if (nominal <= 3) return 0;
   for (let i = 1; i < RANGES.length; i++) {
-    if (nominal <= RANGES[i] && nominal > RANGES[i - 1]) return i;
+    if (nominal <= RANGES[i] && nominal > RANGES[i-1]) return i;
   }
   return -1;
 }
@@ -327,10 +327,10 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
   if (isShaft) {
     const devTable = SHAFT_DEVIATIONS[letter.toLowerCase()];
     if (!devTable) throw new Error(`Unsupported Shaft Deviation: ${letter}`);
-
+    
     const fundDev = devTable[rangeIdx];
     const letterCode = letter.toLowerCase();
-
+    
     // For Shafts: a-h use ES as fundamental, others use EI
     if (['d', 'e', 'f', 'g', 'h'].includes(letterCode)) {
       es = fundDev;
@@ -342,24 +342,24 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
   } else {
     const devTable = HOLE_DEVIATIONS[letter.toUpperCase()];
     if (!devTable) {
-      throw new Error(`Unsupported Hole Deviation: ${letter}`);
+         throw new Error(`Unsupported Hole Deviation: ${letter}`);
     } else {
-      const fundDev = devTable[rangeIdx];
-      const letterCode = letter.toUpperCase();
+        const fundDev = devTable[rangeIdx];
+        const letterCode = letter.toUpperCase();
 
-      // For Holes: A-H use EI as fundamental, others use ES
-      if (['D', 'E', 'F', 'G', 'H'].includes(letterCode)) {
-        ei = fundDev;
-        es = ei + it;
-      } else {
-        es = fundDev;
-        ei = es - it;
-      }
+        // For Holes: A-H use EI as fundamental, others use ES
+        if (['D', 'E', 'F', 'G', 'H'].includes(letterCode)) {
+            ei = fundDev;
+            es = ei + it;
+        } else {
+            es = fundDev;
+            ei = es - it;
+        }
     }
   }
 
-  const displayGrade = isShaft
-    ? `${letter.toLowerCase()}${gradeNum}`
+  const displayGrade = isShaft 
+    ? `${letter.toLowerCase()}${gradeNum}` 
     : `${letter.toUpperCase()}${gradeNum}`;
 
   return {
@@ -373,23 +373,23 @@ function calculateComponentTolerance(nominal: number, gradeStr: string, isShaft:
 }
 
 function getFitRecommendation(hole: string, shaft: string, type: string, lang: Language): string {
-  const h = hole.toUpperCase();
-  const s = shaft.toLowerCase();
+    const h = hole.toUpperCase();
+    const s = shaft.toLowerCase();
+    
+    // Check for specific Hole/Shaft combinations (Hole Basis H or Shaft Basis h)
+    let key = '';
+    if (h.startsWith('H')) {
+        key = `h_${s.charAt(0)}`;
+    } else if (s.startsWith('h')) {
+        key = `${h.charAt(0).toLowerCase()}_h`;
+    }
 
-  // Check for specific Hole/Shaft combinations (Hole Basis H or Shaft Basis h)
-  let key = '';
-  if (h.startsWith('H')) {
-    key = `h_${s.charAt(0)}`;
-  } else if (s.startsWith('h')) {
-    key = `${h.charAt(0).toLowerCase()}_h`;
-  }
-
-  if (key && REC_TEMPLATES[key]) {
-    return REC_TEMPLATES[key][lang];
-  }
-
-  const safeType = (type === 'Clearance' || type === 'Interference' || type === 'Transition') ? type : 'Unknown';
-  return GENERIC_REC[safeType][lang];
+    if (key && REC_TEMPLATES[key]) {
+        return REC_TEMPLATES[key][lang];
+    }
+    
+    const safeType = (type === 'Clearance' || type === 'Interference' || type === 'Transition') ? type : 'Unknown';
+    return GENERIC_REC[safeType][lang];
 }
 
 export const calculateTolerance = async (
@@ -399,9 +399,9 @@ export const calculateTolerance = async (
   grade2: string | undefined,
   language: Language = 'en'
 ): Promise<IsoCalculationResponse> => {
-
+  
   const t = TERMS[language];
-
+  
   let holeTol: ToleranceDetail | undefined | null = null;
   let shaftTol: ToleranceDetail | undefined | null = null;
   let fitResult: FitResult | null = null;
@@ -415,73 +415,73 @@ export const calculateTolerance = async (
     // Check if grade1 is shaft (lowercase)
     const firstChar = grade1.charAt(0);
     const isShaft = firstChar === firstChar.toLowerCase() && firstChar !== firstChar.toUpperCase();
-
+    
     if (isShaft) {
-      shaftTol = calculateComponentTolerance(nominal, grade1, true);
-      holeTol = null;
+        shaftTol = calculateComponentTolerance(nominal, grade1, true);
+        holeTol = null;
     } else {
-      holeTol = calculateComponentTolerance(nominal, grade1, false);
-      shaftTol = null;
+        holeTol = calculateComponentTolerance(nominal, grade1, false);
+        shaftTol = null;
     }
   }
 
   if (mode === CalculationMode.FIT && holeTol && shaftTol) {
     const maxClearance = holeTol.es - shaftTol.ei;
     const minClearance = holeTol.ei - shaftTol.es;
-
+    
     let type: FitResult['type'] = 'Transition';
     let description = "";
 
     // Fit Logic
     if (minClearance >= 0) {
-      type = 'Clearance';
-      description = `${t.gap}. ${t.max_gap}: ${maxClearance}µm, ${t.min_gap}: ${minClearance}µm.`;
+        type = 'Clearance';
+        description = `${t.gap}. ${t.max_gap}: ${maxClearance}µm, ${t.min_gap}: ${minClearance}µm.`;
     } else if (maxClearance <= 0) {
-      type = 'Interference';
-      description = `${t.tight}. ${t.max_int}: ${Math.abs(minClearance)}µm, ${t.min_int}: ${Math.abs(maxClearance)}µm.`;
+        type = 'Interference';
+        description = `${t.tight}. ${t.max_int}: ${Math.abs(minClearance)}µm, ${t.min_int}: ${Math.abs(maxClearance)}µm.`;
     } else {
-      type = 'Transition';
-      description = `${t.mixed}. ${t.max_clearance}: ${maxClearance}µm, ${t.max_int}: ${Math.abs(minClearance)}µm.`;
+        type = 'Transition';
+        description = `${t.mixed}. ${t.max_clearance}: ${maxClearance}µm, ${t.max_int}: ${Math.abs(minClearance)}µm.`;
     }
 
     fitResult = {
-      type,
-      max_clearance: maxClearance > 0 ? maxClearance : undefined,
-      min_clearance: minClearance > 0 ? minClearance : undefined,
-      max_interference: minClearance < 0 ? Math.abs(minClearance) : undefined,
-      min_interference: maxClearance < 0 ? Math.abs(maxClearance) : undefined,
-      description
+        type,
+        max_clearance: maxClearance > 0 ? maxClearance : undefined,
+        min_clearance: minClearance > 0 ? minClearance : undefined,
+        max_interference: minClearance < 0 ? Math.abs(minClearance) : undefined,
+        min_interference: maxClearance < 0 ? Math.abs(maxClearance) : undefined,
+        description
     };
   }
 
   const fitType = fitResult ? fitResult.type : 'Unknown';
-  const recommendation = fitResult
-    ? getFitRecommendation(grade1, grade2 || '', fitType, language)
+  const recommendation = fitResult 
+    ? getFitRecommendation(grade1, grade2 || '', fitType, language) 
     : t.default_rec;
 
   // Generate text summary in requested language
   let summary = `${t.nominal}: ${nominal} mm\n\n`;
-
+  
   if (holeTol) {
-    summary += `${t.hole} [${holeTol.grade}]:\n`;
-    summary += `- ${t.upper} (ES): ${holeTol.es > 0 ? '+' : ''}${holeTol.es} µm\n`;
-    summary += `- ${t.lower} (EI): ${holeTol.ei > 0 ? '+' : ''}${holeTol.ei} µm\n`;
-    summary += `- ${t.limits}: ${holeTol.min_size.toFixed(3)} - ${holeTol.max_size.toFixed(3)} mm\n\n`;
+      summary += `${t.hole} [${holeTol.grade}]:\n`;
+      summary += `- ${t.upper} (ES): ${holeTol.es > 0 ? '+' : ''}${holeTol.es} µm\n`;
+      summary += `- ${t.lower} (EI): ${holeTol.ei > 0 ? '+' : ''}${holeTol.ei} µm\n`;
+      summary += `- ${t.limits}: ${holeTol.min_size.toFixed(3)} - ${holeTol.max_size.toFixed(3)} mm\n\n`;
   }
-
+  
   if (shaftTol) {
-    summary += `${t.shaft} [${shaftTol.grade}]:\n`;
-    summary += `- ${t.upper} (es): ${shaftTol.es > 0 ? '+' : ''}${shaftTol.es} µm\n`;
-    summary += `- ${t.lower} (ei): ${shaftTol.ei > 0 ? '+' : ''}${shaftTol.ei} µm\n`;
-    summary += `- ${t.limits}: ${shaftTol.min_size.toFixed(3)} - ${shaftTol.max_size.toFixed(3)} mm\n\n`;
+      summary += `${t.shaft} [${shaftTol.grade}]:\n`;
+      summary += `- ${t.upper} (es): ${shaftTol.es > 0 ? '+' : ''}${shaftTol.es} µm\n`;
+      summary += `- ${t.lower} (ei): ${shaftTol.ei > 0 ? '+' : ''}${shaftTol.ei} µm\n`;
+      summary += `- ${t.limits}: ${shaftTol.min_size.toFixed(3)} - ${shaftTol.max_size.toFixed(3)} mm\n\n`;
   }
 
   if (fitResult) {
-    const translatedFitType = fitResult.type === 'Clearance' ? t.clearance : fitResult.type === 'Interference' ? t.interference : t.transition;
+      const translatedFitType = fitResult.type === 'Clearance' ? t.clearance : fitResult.type === 'Interference' ? t.interference : t.transition;
 
-    summary += `${t.fit_result}: ${translatedFitType}\n`;
-    summary += `${fitResult.description}\n`;
-    summary += `${t.rec}: ${recommendation}`;
+      summary += `${t.fit_result}: ${translatedFitType}\n`;
+      summary += `${fitResult.description}\n`;
+      summary += `${t.rec}: ${recommendation}`;
   }
 
   return {
