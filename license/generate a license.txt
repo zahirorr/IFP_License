@@ -1,3 +1,0 @@
-node generate-license.js "Firma Müller GmbH" 365 3
-
-a license will be generated in licenses.json
