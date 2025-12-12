@@ -4,7 +4,9 @@
     "customerName": "Demo Customer",
     "expiresAt": "2030-01-01T00:00:00.000Z",
     "maxDevices": 2,
-    "devices": []
+    "devices": [
+      "LAPTOP-SE1ARKLQ"
+    ]
   },
   {
     "key": "6343-49A3-AF29-D332",
