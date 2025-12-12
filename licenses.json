@@ -49,5 +49,12 @@
     "expiresAt": "2026-12-12T00:13:29.557Z",
     "maxDevices": 1,
     "devices": []
+  },
+  {
+    "key": "AF4C-B97D-0C80-0F6E",
+    "customerName": "test user 5",
+    "expiresAt": "2026-12-12T00:18:55.953Z",
+    "maxDevices": 1,
+    "devices": []
   }
 ]
