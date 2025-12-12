@@ -56,5 +56,12 @@
     "expiresAt": "2026-12-12T00:18:55.953Z",
     "maxDevices": 1,
     "devices": []
+  },
+  {
+    "key": "370F-DEAE-2939-46DE",
+    "customerName": "test user 7",
+    "expiresAt": "2026-12-12T20:18:11.127Z",
+    "maxDevices": 2,
+    "devices": []
   }
 ]
