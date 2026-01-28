@@ -63,5 +63,12 @@
     "expiresAt": "2026-12-12T20:18:11.127Z",
     "maxDevices": 2,
     "devices": []
+  },
+  {
+    "key": "E222-118F-1D4C-97E8",
+    "customerName": "youssof-w@hotmail.com",
+    "expiresAt": "2026-07-27T19:50:07.414Z",
+    "maxDevices": 1,
+    "devices": []
   }
 ]
