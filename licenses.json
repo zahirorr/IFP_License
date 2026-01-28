@@ -76,6 +76,8 @@
     "customerName": "khaledalmalek21@gmail.com",
     "expiresAt": "2026-07-27T19:58:36.752Z",
     "maxDevices": 1,
-    "devices": []
+    "devices": [
+      "HP"
+    ]
   }
 ]
