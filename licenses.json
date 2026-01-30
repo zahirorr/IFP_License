@@ -69,7 +69,9 @@
     "customerName": "youssof-w@hotmail.com",
     "expiresAt": "2026-07-27T19:50:07.414Z",
     "maxDevices": 1,
-    "devices": []
+    "devices": [
+      "desktop-54896321"
+    ]
   },
   {
     "key": "05CF-8254-8AEC-254C",
