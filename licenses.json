@@ -69,14 +69,18 @@
     "customerName": "youssof-w@hotmail.com",
     "expiresAt": "2026-07-27T19:50:07.414Z",
     "maxDevices": 1,
-    "devices": []
+    "devices": [
+      "desktop-54896321"
+    ]
   },
   {
     "key": "05CF-8254-8AEC-254C",
     "customerName": "khaledalmalek21@gmail.com",
     "expiresAt": "2026-07-27T19:58:36.752Z",
     "maxDevices": 1,
-    "devices": []
+    "devices": [
+      "HP"
+    ]
   },
   {
     "key": "7778-A410-178C-2E19",
