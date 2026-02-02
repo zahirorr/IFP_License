@@ -87,6 +87,8 @@
     "customerName": "top Fans Facebook",
     "expiresAt": "2026-02-17T19:39:42.448Z",
     "maxDevices": 50,
-    "devices": []
+    "devices": [
+      "DESKTOP-CVOMQ3E"
+    ]
   }
 ]
