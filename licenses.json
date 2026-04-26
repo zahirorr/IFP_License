@@ -88,5 +88,12 @@
     "expiresAt": "2026-02-17T19:39:42.448Z",
     "maxDevices": 50,
     "devices": []
+  },
+  {
+    "key": "07FB-2C2F-9777-175E",
+    "customerName": "test user 6",
+    "expiresAt": "2027-04-26T21:21:24.956Z",
+    "maxDevices": 1,
+    "devices": []
   }
 ]
