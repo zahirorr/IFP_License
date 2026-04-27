@@ -95,5 +95,12 @@
     "expiresAt": "2027-04-26T21:21:24.956Z",
     "maxDevices": 1,
     "devices": []
+  },
+  {
+    "key": "90DA-DA6F-E3EB-7A72",
+    "customerName": "a.alsuwayyid@namthaja.com",
+    "expiresAt": "2027-04-27T18:25:43.117Z",
+    "maxDevices": 1,
+    "devices": []
   }
 ]
