@@ -102,5 +102,12 @@
     "expiresAt": "2027-04-27T18:25:43.117Z",
     "maxDevices": 1,
     "devices": []
+  },
+  {
+    "key": "96A5-FB9F-4F24-AAAF",
+    "customerName": "test user3",
+    "expiresAt": "2027-04-27T18:42:48.044Z",
+    "maxDevices": 1,
+    "devices": []
   }
 ]
