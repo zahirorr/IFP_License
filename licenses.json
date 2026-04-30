@@ -111,5 +111,12 @@
     "expiresAt": "2027-04-30T20:07:46.452Z",
     "maxDevices": 5,
     "devices": []
+  },
+  {
+    "key": "F2D5-D59C-0EFF-B019",
+    "customerName": "a.alsuwayyid@namthaja.com",
+    "expiresAt": "2027-04-30T20:39:12.471Z",
+    "maxDevices": 3,
+    "devices": []
   }
 ]
