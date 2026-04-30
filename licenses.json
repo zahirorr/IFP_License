@@ -102,5 +102,12 @@
     "expiresAt": "2027-04-27T18:25:43.117Z",
     "maxDevices": 1,
     "devices": []
+  },
+  {
+    "key": "DF7D-0866-3656-5B33",
+    "customerName": "test a new key",
+    "expiresAt": "2027-04-30T20:07:46.452Z",
+    "maxDevices": 1,
+    "devices": []
   }
 ]
