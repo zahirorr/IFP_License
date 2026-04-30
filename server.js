@@ -24,7 +24,10 @@ if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO) {
  * Returns { data: [], sha: string }
  */
 async function loadLicensesFromGitHub() {
-  if (!GITHUB_TOKEN) return { data: [], sha: null };
+  if (!GITHUB_TOKEN) {
+    console.error("Debug: GITHUB_TOKEN is missing. Cannot fetch licenses.");
+    throw new Error("GITHUB_TOKEN is missing");
+  }
 
   const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_PATH}`;
   console.log(`Debug: Attempting to fetch licenses from ${url}`); // Log URL
@@ -45,7 +48,7 @@ async function loadLicensesFromGitHub() {
     if (error.response && error.response.status === 404) {
       console.error("Debug: GitHub returned 404. Either file is missing OR Token has no access to private repo.");
       console.error(`Debug: URL tried: ${url}`);
-      return { data: [], sha: null };
+      throw new Error("GitHub returned 404. Check repository permissions or file path.");
     }
     console.error("Debug: Error loading from GitHub:", error.message, error.response?.data);
     throw error;
