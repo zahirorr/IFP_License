@@ -101,7 +101,9 @@
     "customerName": "a.alsuwayyid@namthaja.com",
     "expiresAt": "2027-04-27T18:25:43.117Z",
     "maxDevices": 1,
-    "devices": []
+    "devices": [
+      "LAPTOP-SE1ARKLQ"
+    ]
   },
   {
     "key": "DF7D-0866-3656-5B33",
