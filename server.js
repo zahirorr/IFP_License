@@ -92,6 +92,8 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+let lastError = null;
+
 app.post("/api/verify-license", async (req, res) => {
   const { key, deviceId } = req.body || {};
 
@@ -152,6 +154,7 @@ app.post("/api/verify-license", async (req, res) => {
     }
 
     // Success
+    lastError = null;
     return res.json({
       valid: true,
       reason: null,
@@ -163,8 +166,16 @@ app.post("/api/verify-license", async (req, res) => {
 
   } catch (error) {
     console.error("Verification error:", error);
-    return res.status(500).json({ valid: false, reason: "SERVER_ERROR" });
+    lastError = error.message || String(error);
+    if (error.response) {
+       lastError += ` | Status: ${error.response.status} | Data: ${JSON.stringify(error.response.data)}`;
+    }
+    return res.status(500).json({ valid: false, reason: "SERVER_ERROR", error: lastError });
   }
+});
+
+app.get("/debug", (req, res) => {
+  res.json({ lastError });
 });
 
 const PORT = process.env.PORT || 4000;
