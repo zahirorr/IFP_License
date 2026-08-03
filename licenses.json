@@ -67,8 +67,8 @@
   {
     "key": "E222-118F-1D4C-97E8",
     "customerName": "youssof-w@hotmail.com",
-    "expiresAt": "2026-07-27T19:50:07.414Z",
-    "maxDevices": 1,
+    "expiresAt": "2036-07-27T19:50:07.414Z",
+    "maxDevices": 3,
     "devices": [
       "desktop-54896321"
     ]
